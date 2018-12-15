@@ -281,7 +281,117 @@ router.post('/updateOrder', function(req, res, next) {
         }
 
     });
+});
+
+router.post('/findUser', function(req, res, next) {
+    console.log(req.body);
+    req.route.path = "/page"; //修改path来设定 对 数据库的操作
+    handler(req, res, "user", [{"name":req.body.name}] ,function(data){
+        var obj = {
+            data:data,
+            success:"成功"
+        };
+        var str = JSON.stringify(obj);
+        console.log(data);
+        res.end(str);
+    });
+});
+
+//////////////
+//管理员列表new路线列表
+router.post('/RouteList', function(req, res, next) {
+    //console.log(req.body);
+    req.route.path = "/page"; //修改path来设定 对 数据库的操作
+    var page = req.body.page || 1;
+    var rows = req.body.rows || 5;
+    handler(req, res, "route", [{},{limit: rows, skip:(page-1)*rows}] ,function(data,count){
+        var obj = {
+            data:data,
+            total:count,
+            success:"成功"
+        };
+        var str = JSON.stringify(obj);
+        res.end(str);
+    });
+});
+
+//new查询路线
+router.post('/findRoute2', function(req, res, next) {
+    //console.log(req.body);
+    req.route.path = "/page"; //修改path来设定 对 数据库的操作
+    var page = req.body.page || 1;
+    var rows = req.body.rows || 5;
+    handler(req, res, "route", [{'$or':[{"rname":req.body.rname},{"rcity":req.body.rcity},{"rdate":req.body.rdate}]},{limit: rows, skip:(page-1)*rows}] ,function(data,count){
+        var obj = {
+            data:data,
+            total:count,
+            success:"成功"
+        };
+        var str = JSON.stringify(obj);
+        res.end(str);
+    });
+});
+
+//添加管理员new添加路线
+router.post('/addRoute', function(req, res, next) {
+    console.log(req.body);
+    // var md5 = crypto.createHash('md5');
+    // req.body.password = md5.update(req.body.password).digest('base64');
+    handler(req, res, "route", req.body,function(data){
+
+        //console.log(data);
+        if(data.length==0){
+            res.end('{"err":"抱歉，添加失败"}');
+        }else{
+            res.end('{"success":"添加成功"}');
+        }
+    });
+});
+
+//编辑更新用户new更新路线
+router.post('/updateRoute', function(req, res, next) {
+    //console.log(req.body);
+
+    var selectors = [
+        {"_id":ObjectId(req.body._id)},
+        {"$set":{
+                rname:req.body.rname, //路线名称
+                rcity:req.body.rcity, //路线地点
+                rdate:req.body.rdate
+            }
+        }
+    ];
+    handler(req, res, "route", selectors,function(data){
+
+        //console.log(data);
+        if(data.length==0){
+            res.end('{"err":"抱歉，修改失败"}');
+        }else{
+            res.end('{"success":"修改成功"}');
+        }
+
+    });
 
 });
+
+//删除路线
+router.post('/deleteRoute', function(req, res, next) {
+
+    handler(req, res, "route", {"_id" : ObjectId(req.body._id)},function(data){
+
+        console.log(data);
+        if(data.length==0){
+            res.end('{"err":"抱歉，删除失败"}');
+        }else{
+            var obj = {
+                success:"删除成功"
+            };
+            var str = JSON.stringify(obj);
+            res.end(str);
+        }
+
+    });
+});
+
 
 module.exports = router;

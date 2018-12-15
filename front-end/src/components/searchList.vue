@@ -12,8 +12,8 @@
     <grid
       :listData="listData"
       :theadData="theadData"
-      :ifEdit="true"
-      :ifDelete="true"
+      :ifEdit="false"
+      :ifDelete="false"
       :ifpage="true"
       :pageInfo="pageInfo"
       @on-delete="deleteAdmin"
@@ -36,6 +36,7 @@
       keyname:"rcity"
     }
   ];
+
   // var reflag=0;
   import grid from './grid2.vue'
   export default {
@@ -50,7 +51,8 @@
           rcity:"",
         },
         editAdminObj:null,  //用于存放正在编辑的用户
-        pageInfo:{}
+        pageInfo:{},
+        citynow:""
       }
     },
     mounted:function(){
@@ -59,16 +61,24 @@
       //   window.location.reload();刷新
       //
       // }
+      this.setCity();
       this.getAdminList(1);
 
     },
     methods:{
+      setCity(){
+        if(this.$route.query.content){
+          this.citynow=this.$route.query.content;
+
+        }else{
+          this.citynow=localStorage.cnamenum;
+        }
+      },
       getAdminList(page){
         var _this = this;
-
         this.$reqs.post('/users/findRoute',{
           page:page,
-          rcity:this.$route.query.content,
+          rcity:this.citynow,
           rdate:this.$route.query.content
         }).then(function(result){
           //成功

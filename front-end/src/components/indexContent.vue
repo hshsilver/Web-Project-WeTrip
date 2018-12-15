@@ -19,10 +19,14 @@
 
     <iframe v-show="true" id="show-iframe" frameborder=0 name="showHere"
             src="../../static/rm100/chinamap.html"></iframe>
-    <dev class="text1"><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-      <h1 style="color: #32475f">发现目的地......</h1></dev>
+    <!--<dev class="text1"><br/><br/><br/><br/><br/><br/><br/><br/><br/>-->
+      <!--<h1 style="color: #32475f">← 发现目的地......</h1></dev>-->
+    <dev class="text1"><countdown></countdown></dev>
 
     <!--<iframe v-show="iframeState" id="show-iframe"  frameborder=0 name="showHere" scrolling=auto src=""></iframe>-->
+    <dev class ="text2"><h2 style="color: #32475f">推荐线路</h2></dev>
+    <region></region>
+
     <dev><br/><br/><h1>&nbsp;</h1><br/><br/><br/><br/><br/><br/></dev>
 
   </div>
@@ -30,10 +34,12 @@
 
 <script>
   import banner from "./banner";
+  import region from "./region";
+  import countdown from "./countdown";
 
   export default {
     name: 'hello',
-    components: {banner},
+    components: {banner,region,countdown},
     data() {
       return {
         iframeState: false,
@@ -97,23 +103,45 @@
     background: #fff;
     margin-left: 0px;
     margin-top: 10px;
-    min-width: 700px;
+    min-width: 100px;
     float: left;
     border-radius: 1%;
+    width:49%;
   }
 
   .text1 {
     height: 400px;
+    width:49%;
     box-shadow: 0 1px 5px rgba(13, 62, 73, 0.2);
     background: #fff;
     margin-left: 10px;
+    margin-top: 10px;
+    min-width: 100px;
+    float: right;
+    text-align: center;
+    border-radius: 1%;
+    /*vertical-align: middle;*/
+    /*justify-content:center;*/
+  }
+  .text2 {
+    height: 30px;
+    width:100%;
+    box-shadow: 0 1px 5px rgba(13, 62, 73, 0.2);
+    background: #fff;
+    margin-left: 0px;
     margin-top: 10px;
     min-width: 30%;
     float: left;
     text-align: center;
     border-radius: 1%;
+
     /*vertical-align: middle;*/
     /*justify-content:center;*/
+  }
+
+  .accept-container{
+    margin-left: 10%;
+    margin-right: 10%;
   }
 
 

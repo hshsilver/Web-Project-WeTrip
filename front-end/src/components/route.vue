@@ -1,5 +1,6 @@
 <template>
-    <div class = "wrapper">
+    <div class = "wrapperall">
+      <div class="wrapper">
       <img class = "content-pic" :src="url"/>
       <div class = "text-wrapper">
         <div class = "route_title" ><i class="fa fa-flag fa-fw"></i>{{rname}}</div>
@@ -9,7 +10,14 @@
         <div class = "description" >{{description}}</div>
       </div>
       <button id = "purchase_btn" class = "btn" @click = "purchase()">订购线路</button>
+      </div>
+      <div class="wrapper">
+        <div class = "route_title" ><i class="fa fa-list fa-fw"></i>线路详情</div>
+        <div class = "description" >&nbsp;&nbsp;&nbsp;&nbsp;这里是详情介绍。</div>
+      </div>
     </div>
+
+
 
 </template>
 
@@ -49,11 +57,12 @@
         var myDate=new Date();
         this.info.time=""+myDate.getFullYear()+"年"+myDate.getMonth()+"月"+myDate.getDate()+"日"+myDate.getHours()+"时"+myDate.getMinutes()+"分"+myDate.getSeconds()+"秒";
         this.info.rname=this.$route.query.username.rname;
+        this.info.pname=localStorage.c;
         console.log(this.info.time);
         this.$reqs.post('/users/addOrder',this.info)
             .then((result)=>{
               //成功
-              alert("订购成功");
+              alert("恭喜您0折订购成功！请在\"我的信息\"中查看详情！");
             }).catch(function (error) {
             //失败
             console.log(error)
@@ -145,6 +154,7 @@
     margin-top: 50px;
     font-size:22px;
   }
+
 
   #purchase_btn {
     float:left;

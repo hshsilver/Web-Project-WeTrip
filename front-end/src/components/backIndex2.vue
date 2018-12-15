@@ -2,60 +2,50 @@
   <div class="backlogin">
     <div class="header">
       <div class="search_box" :class="{search_box_fouce:search_box_fouce}">
-        <i class="fa fa-search" aria-hidden="true"></i>
-        <input @focus="focusFn" @blur="blurFn" type="text" name="" id="" value="" placeholder="搜索 . . . " />
+        <i class="fa fa-search"  aria-hidden="true"></i>
+        <input class="inputtext" @focus="focusFn" @blur="blurFn" type="text" name="" id="" value="" placeholder="搜索省份 . . . " v-model="Admin.find" />
+        <router-link :to="{path:'/backIndex/searchList',query:{content:Admin.find}}"><button class="inputbutton">查询</button></router-link>
       </div>
       <div class="handler">
         <div class="more" @click="toggleSlide">
           <i class="fa fa-bars" aria-hidden="true"></i>
           <ul :class="{showul:showExit}">
             <li><a href="javascript:;" @click="logout"><i class="fa fa-sign-out" aria-hidden="true"></i>退出</a></li>
-            <li><a href="javascript:;" @click="keyset">修改密码</a></li>
-            <li><a href="javascript:;" @click="contact">意见反馈</a></li>
+            <li><a href="javascript:;" @click="tucao">我要吐槽</a></li>
+            <li><a href="javascript:;" @click="contact">联系我们</a></li>
           </ul>
         </div>
-        <img src="../assets/images/teacherimg01.png" alt="" />
+        <img src="../assets/images/noavatar_big.gif" alt="头像" />
       </div>
     </div>
 
     <!--侧面导航-->
     <div class="sidenav_box">
-      <img class="logo" src="../assets/images/logo03.png" alt="" />
+      <img class="logo" src="../assets/images/timg.jpg" alt="途马旅游" />
+      <p style="text-align: center">途马旅游</p>
       <ul class="sidenav">
         <li class="now">
           <router-link to="/backIndex/indexContent">
             <i class="fa fa-home" aria-hidden="true"></i>
-            <span>网站</span>
+            <span>网站首页</span>
           </router-link>
         </li>
         <li>
           <router-link to="/backIndex/adminList">
             <i class="fa fa-user-o" aria-hidden="true"></i>
-            <span>后台人员</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/backIndex/studentList">
-            <i class="fa fa-user-circle-o" aria-hidden="true"></i>
             <span>用户管理</span>
           </router-link>
         </li>
-        <li>
-          <router-link to="/backIndex/banner">
-            <i class="fa fa-list" aria-hidden="true"></i>
-            <span>条幅</span>
-          </router-link>
-        </li>
+        <!--<li>-->
+        <!--<router-link to="/backIndex/route">-->
+        <!--<i class="fa fa-table" aria-hidden="true"></i>-->
+        <!--<span>线路详情</span>-->
+        <!--</router-link>-->
+        <!--</li>-->
         <li>
           <router-link to="/backIndex/orderList">
             <i class="fa fa-table" aria-hidden="true"></i>
             <span>订单管理</span>
-          </router-link>
-        </li>
-        <li>
-          <router-link to="/backIndex/route">
-            <i class="fa fa-car" aria-hidden="true"></i>
-            <span>路线详情</span>
           </router-link>
         </li>
       </ul>
@@ -64,7 +54,7 @@
     <div class="content">
 
       <ul class="breadcrumb">
-        <li><a href="#/backIndex2/">首页</a></li>
+        <li><a href="#/backIndex/">途马旅游网</a></li>
         <li>{{pageTitle}}</li>
       </ul>
       <router-view></router-view>
@@ -76,13 +66,13 @@
 
 <script>
   var pageTitleObj = {
-    indexContent:"网站首页",
+    indexContent:"首页",
     adminList:"后台人员",
-    studentList:"用户管理",
     banner:"条幅",
-    courseEdit:"课程编辑",
-    orderList:"订单管理",
-    route:"线路"
+    banner:"订单管理",
+
+    route:"线路详情",
+    searchList: "搜索结果（如果内容显示不正常请刷新页面一次即可）"
   };
 
   export default {
@@ -91,7 +81,10 @@
       return {
         search_box_fouce:false,
         showExit:false,
-        pageTitle: pageTitleObj[ this.$route.path.substr( this.$route.path.lastIndexOf("/")+1 ) ] || "网站首页"
+        pageTitle: pageTitleObj[ this.$route.path.substr( this.$route.path.lastIndexOf("/")+1 ) ] || "首页",
+        Admin:{
+          find:""
+        }
       }
     },
     methods:{
@@ -116,11 +109,14 @@
           console.log(error)
         });
       },
-      keyset(){
-
+      tucao(){
+        window.open("https://support.qq.com/products/48356")
       },
       contact(){//联系我们
         window.open("http://www.heshuhao.com");
+
+      },
+      findPlace(){
 
       }
     },
@@ -147,7 +143,35 @@
     margin-left: 80px;
     min-width: 740px;
   }
+  .inputtext{
+    font-size: 20px;
+  }
 
+  .inputbutton{
+    box-sizing: border-box;
+    border: none 0;
+    height: 24px;
+    line-height: 24px;
+    width:50px;
+    background: gray;
+    font-size: 20px;
+    border-radius: 3px;
+    /*margin-right: 40px;*/
+    transition: all 0.5s ease;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    margin-top: 15px;
+  }
+  .inputbutton:hover{
+    background: #2668b5;
+  }
+  .inputbutton[disabled]{
+    opacity: 0.8;
+  }
+  .inputbutton[disabled]:hover{
+    background:#4187db;
+  }
   .sidenav_box{
     width: 80px;
     box-shadow: 0 1px 5px rgba(13,62,73,0.2) ;
@@ -161,6 +185,8 @@
   .sidenav_box .logo{
     width: 46px;
     margin: 20px 0 0 17px;
+    border-radius: 10%;
+
   }
   .sidenav{
     margin-top: 30px;
@@ -236,8 +262,10 @@
   /*顶部栏*/
   .search_box{
     color: #979fa8;
-    padding-top: 20px;
+    padding-top: 10px;
     float: left;
+    z-index:1
+
   }
   .search_box i{
     margin: 0 12px 0 70px;
@@ -256,6 +284,7 @@
     float: right;
     margin-right: 20px;
     cursor: pointer;
+    z-index:100000;
   }
   .handler .more{
     font-size: 20px;

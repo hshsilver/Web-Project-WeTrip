@@ -8,9 +8,11 @@ import indexContent from '@/components/indexContent'
 import adminList from '@/components/adminList'
 import orderList from '@/components/orderList'
 import routeList from '@/components/routeList'
-import backIndex2 from '@/components/backIndex2'
 import searchList from '@/components/searchList'
 import route from '@/components/route'
+import region from '@/components/region'
+import personalInfo from'@/components/personalInfo'
+import countdown from '@/components/countdown'
 
 Vue.use(Router)
 
@@ -23,10 +25,6 @@ export default new Router({
       path: '/',
       name: 'Login',
       component: Login
-    },{
-      path:'/backIndex2',
-      name:'backIndex2',
-      component:backIndex2
     },{
       path:'/backIndex',
       name:'backIndex',
@@ -54,6 +52,16 @@ export default new Router({
           path:'route',
           component:route
         },{
+          path:'region',
+          component:region
+        },{
+          path:'personalInfo',
+          component:personalInfo
+        },{
+          path:'countdown',
+          component:countdown
+        },
+        {
           path: '*',           //其他路径都跳转到首页
           redirect: 'indexContent'
         }

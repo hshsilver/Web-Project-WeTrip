@@ -214,8 +214,8 @@
     color: #42b983;
   }
   .swiper-slide{
-    /*height:300px;*/
-    width:100%;
+    height:250px;
+    /*width:4px;*/
   }
 
 </style>

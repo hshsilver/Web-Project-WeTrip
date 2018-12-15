@@ -38,7 +38,7 @@
           <router-link :to="{path:'/backIndex/route',query:{username:item}}">
             <!--{path:'/workTaskEdit',query{id:work_task.id}}-->
             <button class="test">
-              详情{{index+1}}
+              详情
             </button>
           </router-link>
         </td>

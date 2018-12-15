@@ -3,7 +3,7 @@
     <div class="header">
       <div class="search_box" :class="{search_box_fouce:search_box_fouce}">
         <i class="fa fa-search"  aria-hidden="true"></i>
-        <input class="inputtext" @focus="focusFn" @blur="blurFn" type="text" name="" id="" value="" placeholder="搜索省份 . . . " v-model="Admin.find" />
+        <input class="inputtext" @focus="focusFn" @blur="blurFn" type="text" name="" id="" value="" placeholder="搜索省份例如'四川'" v-model="Admin.find" />
         <router-link :to="{path:'/backIndex/searchList',query:{content:Admin.find}}"><button class="inputbutton">查询</button></router-link>
       </div>
       <div class="handler">
@@ -15,14 +15,16 @@
             <li><a href="javascript:;" @click="contact">联系我们</a></li>
           </ul>
         </div>
-        <img src="../assets/images/noavatar_big.gif" alt="头像" />
+        <router-link to="/backIndex/personalInfo">
+          <img src="../assets/images/noavatar_big.gif" alt="" id ="photo"/>
+        </router-link>
       </div>
     </div>
 
     <!--侧面导航-->
     <div class="sidenav_box">
-      <img class="logo" src="../assets/images/timg.jpg" alt="途马旅游" />
-      <p style="text-align: center">途马旅游</p>
+      <img class="logo" src="../assets/images/logo.jpg" alt="途马旅游" />
+      <p style="text-align: center;color:#4187db;font-weight:bolder">途马旅游</p>
       <ul class="sidenav">
         <li class="now">
           <router-link to="/backIndex/indexContent">
@@ -31,9 +33,22 @@
           </router-link>
         </li>
         <li>
+          <router-link to="/backIndex/personalInfo">
+            <i class="fa fa-info" aria-hidden="true"></i>
+            <span>我的信息</span>
+          </router-link>
+        </li>
+
+        <li v-if="showadmin">
           <router-link to="/backIndex/adminList">
             <i class="fa fa-user-o" aria-hidden="true"></i>
             <span>用户管理</span>
+          </router-link>
+        </li>
+        <li v-if="showadmin">
+          <router-link to="/backIndex/routeList">
+            <i class="fa fa-map-signs" aria-hidden="true"></i>
+            <span>路线管理</span>
           </router-link>
         </li>
         <!--<li>-->
@@ -42,7 +57,7 @@
             <!--<span>线路详情</span>-->
           <!--</router-link>-->
         <!--</li>-->
-        <li>
+        <li v-if="showadmin">
           <router-link to="/backIndex/orderList">
             <i class="fa fa-table" aria-hidden="true"></i>
             <span>订单管理</span>
@@ -70,9 +85,10 @@
     adminList:"后台人员",
     banner:"条幅",
     banner:"订单管理",
-
+    personalInfo:'我的信息',
     route:"线路详情",
-    searchList: "搜索结果（如果内容显示不正常请刷新页面一次即可）"
+    searchList: "搜索结果（如果内容显示不正常请刷新页面一次即可）",
+    routeList:"线路管理"
   };
 
   export default {
@@ -84,7 +100,14 @@
         pageTitle: pageTitleObj[ this.$route.path.substr( this.$route.path.lastIndexOf("/")+1 ) ] || "首页",
         Admin:{
           find:""
-        }
+        },
+        showadmin:false
+      }
+    },
+    mounted:function(){
+
+      if (localStorage.c=="admin"){
+        this.showadmin=true;
       }
     },
     methods:{
@@ -144,7 +167,7 @@
     min-width: 740px;
   }
   .inputtext{
-    font-size: 20px;
+    font-size: 16px;
   }
 
   .inputbutton{
@@ -154,7 +177,7 @@
     line-height: 24px;
     width:50px;
     background: gray;
-    font-size: 20px;
+    font-size: 16px;
     border-radius: 3px;
     /*margin-right: 40px;*/
     transition: all 0.5s ease;
@@ -183,8 +206,8 @@
     z-index: 99;
   }
   .sidenav_box .logo{
-    width: 46px;
-    margin: 20px 0 0 17px;
+    width: 60px;
+    margin: 10px 0 0 10px;
     border-radius: 10%;
 
   }
@@ -360,7 +383,12 @@
     background: #fff;
     margin-top: 10px;
   }
-
+  #photo{
+    width: 50px;
+    border-radius: 50%;
+    margin-top: 5px;
+    margin-right: 30px;
+  }
 
 
 </style>

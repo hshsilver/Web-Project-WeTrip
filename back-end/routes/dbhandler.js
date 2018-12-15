@@ -234,7 +234,21 @@ var methodType = {
     showCourse:find,
     register:add,
     page:page, //分页
-    findRoute:page,
+    //findRoute:page,
+
+    // deleteRoute:deletes,
+    // updateRoute:updates,
+    // addRoute:add,
+    // findRoute:find,
+
+    findRoute:find,
+    deleteRoute:deletes,
+    updateRoute:updates,
+    addRoute:add,
+    findRoute2:find,
+
+    // findroute:find,
+    // RouteList:page,
 };
 //主逻辑    服务器  ， 请求    --》
 // req.route.path ==》 防止前端的请求 直接操作你的数据库
