@@ -2,8 +2,9 @@
   <div class="backlogin">
     <div class="header">
       <div class="search_box" :class="{search_box_fouce:search_box_fouce}">
-        <i class="fa fa-search" aria-hidden="true"></i>
-        <input @focus="focusFn" @blur="blurFn" type="text" name="" id="" value="" placeholder="搜索 . . . " />
+        <i class="fa fa-search"  aria-hidden="true"></i>
+        <input class="inputtext" @focus="focusFn" @blur="blurFn" type="text" name="" id="" value="" placeholder="搜索省份 . . . " v-model="Admin.find" />
+        <router-link :to="{path:'/backIndex/searchList',query:{content:Admin.find}}"><button class="inputbutton">查询</button></router-link>
       </div>
       <div class="handler">
         <div class="more" @click="toggleSlide">
@@ -35,6 +36,12 @@
             <span>用户管理</span>
           </router-link>
         </li>
+        <!--<li>-->
+          <!--<router-link to="/backIndex/route">-->
+            <!--<i class="fa fa-table" aria-hidden="true"></i>-->
+            <!--<span>线路详情</span>-->
+          <!--</router-link>-->
+        <!--</li>-->
         <li>
           <router-link to="/backIndex/orderList">
             <i class="fa fa-table" aria-hidden="true"></i>
@@ -47,7 +54,7 @@
     <div class="content">
 
       <ul class="breadcrumb">
-        <li><a href="#/backIndex/">首页</a></li>
+        <li><a href="#/backIndex/">途马旅游网</a></li>
         <li>{{pageTitle}}</li>
       </ul>
       <router-view></router-view>
@@ -59,12 +66,13 @@
 
 <script>
   var pageTitleObj = {
-    indexContent:"网站首页",
+    indexContent:"首页",
     adminList:"后台人员",
     banner:"条幅",
     banner:"订单管理",
-    route:"线路",
-    map: "地图"
+
+    route:"线路详情",
+    searchList: "搜索结果（如果内容显示不正常请刷新页面一次即可）"
   };
 
   export default {
@@ -73,7 +81,10 @@
       return {
         search_box_fouce:false,
         showExit:false,
-        pageTitle: pageTitleObj[ this.$route.path.substr( this.$route.path.lastIndexOf("/")+1 ) ] || "网站首页"
+        pageTitle: pageTitleObj[ this.$route.path.substr( this.$route.path.lastIndexOf("/")+1 ) ] || "首页",
+        Admin:{
+          find:""
+        }
       }
     },
     methods:{
@@ -104,6 +115,9 @@
       contact(){//联系我们
         window.open("http://www.heshuhao.com");
 
+      },
+      findPlace(){
+
       }
     },
     watch:{ //监控路径变化  当路径发送变化的时候，改变面包屑导航的显示
@@ -129,7 +143,35 @@
     margin-left: 80px;
     min-width: 740px;
   }
+  .inputtext{
+    font-size: 20px;
+  }
 
+  .inputbutton{
+    box-sizing: border-box;
+    border: none 0;
+    height: 24px;
+    line-height: 24px;
+    width:50px;
+    background: gray;
+    font-size: 20px;
+    border-radius: 3px;
+    /*margin-right: 40px;*/
+    transition: all 0.5s ease;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+    margin-top: 15px;
+  }
+  .inputbutton:hover{
+    background: #2668b5;
+  }
+  .inputbutton[disabled]{
+    opacity: 0.8;
+  }
+  .inputbutton[disabled]:hover{
+    background:#4187db;
+  }
   .sidenav_box{
     width: 80px;
     box-shadow: 0 1px 5px rgba(13,62,73,0.2) ;
@@ -220,9 +262,10 @@
   /*顶部栏*/
   .search_box{
     color: #979fa8;
-    padding-top: 20px;
+    padding-top: 10px;
     float: left;
     z-index:1
+
   }
   .search_box i{
     margin: 0 12px 0 70px;

@@ -9,6 +9,8 @@ import adminList from '@/components/adminList'
 import orderList from '@/components/orderList'
 import routeList from '@/components/routeList'
 import backIndex2 from '@/components/backIndex2'
+import searchList from '@/components/searchList'
+import route from '@/components/route'
 
 Vue.use(Router)
 
@@ -31,7 +33,7 @@ export default new Router({
       component: backIndex,
       children:[
         {
-          path: '/banner', //条幅
+          path: 'banner', //条幅
           component: banner
         },{
           path: 'indexContent', //首页统计
@@ -45,6 +47,12 @@ export default new Router({
         },{
           path:'routeList',
           component: routeList
+        },{
+          path:'searchList',
+          component:searchList
+        },{
+          path:'route',
+          component:route
         },{
           path: '*',           //其他路径都跳转到首页
           redirect: 'indexContent'

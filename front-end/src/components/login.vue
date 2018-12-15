@@ -231,7 +231,6 @@
     background:#4187db;
   }
 
-
   .title{
     color: #273444;
     /*font-size: 1.5em;*/

@@ -140,8 +140,10 @@ router.post('/findOrder', function(req, res, next) {
 //new查询路线 单
 router.post('/findRoute', function(req, res, next) {
     //console.log(req.body);
+    var page = req.body.page || 1;
+    var rows = req.body.rows || 5;
     req.route.path = "/page"; //修改path来设定 对 数据库的操作
-    handler(req, res, "order", {"rname":"本州七日游"} ,function(data){
+    handler(req, res, "route", [{"rcity":req.body.rcity},{limit: rows, skip:(page-1)*rows}] ,function(data){
         var obj = {
             data:data,
             success:"成功"
@@ -237,7 +239,8 @@ router.post('/update', function(req, res, next) {
         {"_id":ObjectId(req.body._id)},
         {"$set":{
                 name:req.body.name, //用户名称
-                phone:req.body.phone //联系电话
+                phone:req.body.phone, //联系电话
+                idnumber: req.body.idnumber //身份证
             }
         }
     ];
@@ -280,7 +283,5 @@ router.post('/updateOrder', function(req, res, next) {
     });
 
 });
-
-
 
 module.exports = router;

@@ -1,11 +1,11 @@
 <template>
   <div class="">
-
     <table border="" cellspacing="" cellpadding="">
       <thead>
       <tr>
         <th>序号</th>
         <th v-for="(item, index) in theadData">{{item.title}}</th>
+        <th></th>
       </tr>
       </thead>
       <tbody>
@@ -17,7 +17,6 @@
       <tr v-for="(item, index) in listData">
         <td>{{index+1}}</td>
         <!--按照头部的-->
-
         <td v-for="(item2, index2) in theadData">
                         <span v-if="index2 === 0" style="float: right;">
                             <i title="编辑" v-if="ifEdit" class="fa fa-edit" aria-hidden="true"
@@ -34,15 +33,15 @@
           {{item[item2.keyname]}}
         </td>
 
-        <!--<td>-->
-          <!--&lt;!&ndash;<router-link to='{path:'/backIndex/indexContent',params:{username={{item[0]}}}}'>&ndash;&gt;-->
-          <!--<router-link :to="{path:'/backIndex/indexContent',query:{username:item}}">-->
-            <!--&lt;!&ndash;{path:'/workTaskEdit',query{id:work_task.id}}&ndash;&gt;-->
-            <!--<button class="test">-->
-              <!--详情{{index+1}}-->
-            <!--</button>-->
-          <!--</router-link>-->
-        <!--</td>-->
+        <td>
+          <!--<router-link to='{path:'/backIndex/indexContent',params:{username={{item[0]}}}}'>-->
+          <router-link :to="{path:'/backIndex/route',query:{username:item}}">
+            <!--{path:'/workTaskEdit',query{id:work_task.id}}-->
+            <button class="test">
+              详情{{index+1}}
+            </button>
+          </router-link>
+        </td>
 
       </tr>
 
@@ -86,7 +85,7 @@
   import pagebar from './pagebar.vue'
 
   export default {
-    name: 'grid',
+    name: 'grid2',
     data() {
       return {}
     },

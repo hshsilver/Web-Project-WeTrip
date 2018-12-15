@@ -1,14 +1,14 @@
 <template>
   <div class="adminList main">
-    <div class="input_box">
-      <i class="fa fa-user fa-fw"></i>&nbsp;<input v-model="Admin.name" class="myinput" type="text" placeholder="用户名" />
-      <i class="fa fa-phone fa-fw"></i>&nbsp;<input v-model="Admin.phone" class="myinput" type="text" placeholder="手机号" />
-      <i class="fa fa-key fa-fw"></i>&nbsp;<input v-if="!editAdminObj" v-model="Admin.password" class="myinput" type="password" placeholder="密码" />
-      <i class="fa fa-id-card fa-fw"></i>&nbsp;<input  v-model="Admin.idnumber" class="myinput" type="text" placeholder="身份证号" />
-      <button v-if="!editAdminObj" class="btn" @click="addAdmin()"><i class="fa fa-plus" aria-hidden="true"></i>添加</button>
-      <button v-if="editAdminObj" class="btn" @click="saveEditAdmin()"><i class="fa fa-save" aria-hidden="true"></i>保存</button>
-      <button style="opacity: 0.8;" v-if="editAdminObj" class="btn" @click="cancelEditAdmin()"><i class="fa fa fa-times-circle-o" aria-hidden="true"></i>取消</button>
-    </div>
+    <!--<div class="input_box">-->
+      <!--<i class="fa fa-user fa-fw"></i>&nbsp;<input v-model="Admin.name" class="myinput" type="text" placeholder="用户名" />-->
+      <!--<i class="fa fa-phone fa-fw"></i>&nbsp;<input v-model="Admin.phone" class="myinput" type="text" placeholder="手机号" />-->
+      <!--<i class="fa fa-key fa-fw"></i>&nbsp;<input v-if="!editAdminObj" v-model="Admin.password" class="myinput" type="password" placeholder="密码" />-->
+      <!--<i class="fa fa-id-card fa-fw"></i>&nbsp;<input  v-model="Admin.idnumber" class="myinput" type="text" placeholder="身份证号" />-->
+      <!--<button v-if="!editAdminObj" class="btn" @click="addAdmin()"><i class="fa fa-plus" aria-hidden="true"></i>添加</button>-->
+      <!--<button v-if="editAdminObj" class="btn" @click="saveEditAdmin()"><i class="fa fa-save" aria-hidden="true"></i>保存</button>-->
+      <!--<button style="opacity: 0.8;" v-if="editAdminObj" class="btn" @click="cancelEditAdmin()"><i class="fa fa fa-times-circle-o" aria-hidden="true"></i>取消</button>-->
+    <!--</div>-->
     <grid
       :listData="listData"
       :theadData="theadData"
@@ -26,17 +26,18 @@
 <script>
   var theadData = [
     {
-      title:"用户名",
-      keyname:"name"
+      title:"线路名",
+      keyname:"rname"
     },{
-      title:"手机号",
-      keyname:"phone"
+      title:"时间",
+      keyname:"rdate"
     },{
-      title:"身份证号",
-      keyname:"idnumber"
+      title:"地点",
+      keyname:"rcity"
     }
   ];
-  import grid from './grid.vue'
+  // var reflag=0;
+  import grid from './grid2.vue'
   export default {
     name: 'adminList',
     data () {
@@ -44,24 +45,31 @@
         listData:[],
         theadData:theadData,
         Admin:{ //用户信息
-          name:"",
-          phone:"",
-          password:"",
-          idnumber:"",
+          rname:"",
+          rdate:"",
+          rcity:"",
         },
         editAdminObj:null,  //用于存放正在编辑的用户
         pageInfo:{}
       }
     },
     mounted:function(){
+      // if(localStorage.refresh!==Admin.find){
+      //
+      //   window.location.reload();刷新
+      //
+      // }
       this.getAdminList(1);
+
     },
     methods:{
       getAdminList(page){
         var _this = this;
 
-        this.$reqs.post('/users/AdminList',{
-          page:page
+        this.$reqs.post('/users/findRoute',{
+          page:page,
+          rcity:this.$route.query.content,
+          rdate:this.$route.query.content
         }).then(function(result){
           //成功
           _this.listData = result.data.data;

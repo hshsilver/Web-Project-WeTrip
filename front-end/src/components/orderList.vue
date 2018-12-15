@@ -1,16 +1,16 @@
 <template>
   <div class="adminList main">
     <div class="input_box">
-      <input v-model="Admin.pname" class="myinput" type="text" placeholder="旅客名" />
-      <input v-model="Admin.rname" class="myinput" type="text" placeholder="线路名" />
+      <i class="fa fa-user fa-fw"></i>&nbsp;<input v-model="Admin.pname" class="myinput" type="text" placeholder="旅客名" />
+      <i class="fa fa-flag fa-fw"></i>&nbsp;<input v-model="Admin.rname" class="myinput" type="text" placeholder="线路名" />
       <!--<input v-model="Admin.time" class="myinput" type="text" placeholder="时间" />-->
       <!--<input v-if="!editAdminObj" v-model="Admin.password" class="myinput" type="text" placeholder="时间" />-->
-      <input  v-model="Admin.time" class="myinput" type="text" placeholder="时间" />
+      <i class="fa fa-clock-o fa-fw"></i>&nbsp;<input  v-model="Admin.time" class="myinput" type="text" placeholder="时间" />
       <button v-if="!editAdminObj" class="btn" @click="addAdmin()"><i class="fa fa-plus" aria-hidden="true"></i>添加</button>
       <button v-if="editAdminObj" class="btn" @click="saveEditAdmin()"><i class="fa fa-save" aria-hidden="true"></i>保存</button>
       <button style="opacity: 0.8;" v-if="editAdminObj" class="btn" @click="cancelEditAdmin()"><i class="fa fa fa-times-circle-o" aria-hidden="true"></i>取消</button>
       <button class="btn" @click="findOrder(1)"><i class="fa fa-search" aria-hidden="false"></i>查询</button>
-      <button class="btn" @click="findRoute()"><i class="fa fa-search" aria-hidden="false"></i>查询路线</button>
+      <button class="btn" @click="findRoute()"><i class="fa fa-search" aria-hidden="false"></i>单查路线显示在输入框</button>
     </div>
     <grid
       :listData="listData"
@@ -35,7 +35,7 @@
       title:"线路名",
       keyname:"rname"
     },{
-      title:"时间",
+      title:"订购时间",
       keyname:"time"
 
     }
@@ -219,6 +219,6 @@
     padding: 0 10px;
   }
   .input_box .myinput{
-    width: 25%;
+    width: 20%;
   }
 </style>

@@ -7,6 +7,7 @@
 <template>
   <div class="accept-container">
     <br/>
+
     <banner></banner>
 
     <!--<div class="go-back" v-show="goBackState" @click="goBack">GoBack</div>-->
@@ -62,7 +63,8 @@
       }
     },
     mounted() {
-
+      // console.log(this.$route.query.username.phone+" 参数测试");
+      // console.log(params)
       const oIframe = document.getElementById('show-iframe');
       const deviceWidth = document.documentElement.clientWidth;
       const deviceHeight = document.documentElement.clientHeight;
