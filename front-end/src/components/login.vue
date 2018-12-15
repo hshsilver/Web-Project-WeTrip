@@ -3,7 +3,7 @@
     <div class="login_box">
       <div class="title">途🐎旅游网登录</div>
       <div>
-        <input class="myinput" type="text" placeholder="手机号/用户名" v-model="username" />
+        <input class="myinput" id="inputname" type="text" placeholder="手机号/用户名" v-model="username" />
       </div>
       <div>
         <input @keyup.13="login" class="myinput" type="password" placeholder="口令" v-model="password" />
@@ -69,6 +69,10 @@
             if(result.data.err){
               alert(result.data.err);
             }else{
+              var input = document.getElementById("inputname").value;
+              var storage=window.localStorage;
+              storage.setItem("c",input);
+              console.log(storage.getItem("c"));
               _this.$router.push({path:'/backIndex/indexContent'});
             }
             _this.disablebtn = false;

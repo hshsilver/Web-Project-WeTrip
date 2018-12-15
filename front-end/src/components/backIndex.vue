@@ -14,7 +14,9 @@
             <li><a href="javascript:;" @click="contact">联系我们</a></li>
           </ul>
         </div>
-        <img src="../assets/images/noavatar_big.gif" alt="头像" />
+        <router-link to="/backIndex/personalInfo">
+          <img src="../assets/images/noavatar_big.gif" alt="" id ="photo"/>
+        </router-link>
       </div>
     </div>
 
@@ -64,7 +66,8 @@
     banner:"条幅",
     banner:"订单管理",
     route:"线路",
-    map: "地图"
+    map: "地图",
+    personalInfo: "个人中心"
   };
 
   export default {
@@ -281,7 +284,7 @@
   .handler .more a:hover{
     background: #f8f9fb;
   }
-  .handler > img{
+  #photo{
     width: 50px;
     border-radius: 50%;
     margin-top: 5px;

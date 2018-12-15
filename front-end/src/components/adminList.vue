@@ -59,7 +59,6 @@
     methods:{
       getAdminList(page){
         var _this = this;
-
         this.$reqs.post('/users/AdminList',{
           page:page
         }).then(function(result){
@@ -92,10 +91,11 @@
         this.Admin = JSON.parse(JSON.stringify(item));
       },
       saveEditAdmin(){
-        if(!this.Admin.name || !this.Admin.phone||this.Admin.idnumber){
+        if(!this.Admin.name || !this.Admin.phone||!this.Admin.idnumber){
           alert("不能为空");
           return false;
         }
+        console.log(this.Admin);
         this.$reqs.post('/users/update', this.Admin)
           .then((result)=>{
             //成功

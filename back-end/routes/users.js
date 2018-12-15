@@ -137,6 +137,20 @@ router.post('/findOrder', function(req, res, next) {
     });
 });
 
+router.post('/findUser', function(req, res, next) {
+    console.log(req.body);
+    req.route.path = "/page"; //修改path来设定 对 数据库的操作
+    handler(req, res, "user", [{"name":req.body.name}] ,function(data){
+        var obj = {
+            data:data,
+            success:"成功"
+        };
+        var str = JSON.stringify(obj);
+        console.log(data);
+        res.end(str);
+    });
+});
+
 //new查询路线 单
 router.post('/findRoute', function(req, res, next) {
     //console.log(req.body);
@@ -232,19 +246,23 @@ router.post('/deleteOrder', function(req, res, next) {
 //编辑更新用户
 router.post('/update', function(req, res, next) {
     //console.log(req.body);
-
+    console.log("fafafafaafafafafaff");
+    console.log(ObjectId(req.body._id));
     var selectors = [
         {"_id":ObjectId(req.body._id)},
         {"$set":{
                 name:req.body.name, //用户名称
-                phone:req.body.phone //联系电话
+                phone:req.body.phone, //联系电话
+                idnumber:req.body.idnumber
             }
         }
     ];
     handler(req, res, "user", selectors,function(data){
-
         //console.log(data);
         if(data.length==0){
+            console.log("fafafafaafafafafaff");
+            console.log(ObjectId(req.body._id));
+            console.log(req.body);
             res.end('{"err":"抱歉，修改失败"}');
         }else{
             res.end('{"success":"修改成功"}');

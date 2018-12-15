@@ -9,6 +9,9 @@ import adminList from '@/components/adminList'
 import orderList from '@/components/orderList'
 import routeList from '@/components/routeList'
 import backIndex2 from '@/components/backIndex2'
+import personalInfo from'@/components/personalInfo'
+import recommend from'@/components/recommend'
+
 
 Vue.use(Router)
 
@@ -46,9 +49,16 @@ export default new Router({
           path:'routeList',
           component: routeList
         },{
+          path:'personalInfo',
+          component: personalInfo
+        },{
+          path:'recommend',
+          component: recommend
+        },{
           path: '*',           //其他路径都跳转到首页
           redirect: 'indexContent'
         }
+
       ]
     }
   ]
