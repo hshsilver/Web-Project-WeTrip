@@ -9,6 +9,7 @@
         <div class = "route_cost" ><i class="fa fa-rmb fa-fw"></i>{{cost}}</div>
         <div class = "description" >{{description}}</div>
       </div>
+        <input v-model="phonenumber" class="myinput" type="text" placeholder="在此输入您的手机号" />
       <button id = "purchase_btn" class = "btn" @click = "purchase()">订购线路</button>
       </div>
       <div class="wrapper">
@@ -35,7 +36,11 @@
           pname:"test",
           rname:"test",
           time:"test",
-        }
+          phonenumsend:""
+
+        },
+        phonenumber:""
+
       }
     },
     mounted:function(){
@@ -58,6 +63,7 @@
         this.info.time=""+myDate.getFullYear()+"年"+myDate.getMonth()+"月"+myDate.getDate()+"日"+myDate.getHours()+"时"+myDate.getMinutes()+"分"+myDate.getSeconds()+"秒";
         this.info.rname=this.$route.query.username.rname;
         this.info.pname=localStorage.c;
+        this.info.phonenumsend=this.phonenumber;
         console.log(this.info.time);
         this.$reqs.post('/users/addOrder',this.info)
             .then((result)=>{
@@ -158,6 +164,7 @@
 
   #purchase_btn {
     float:left;
+    margin-left: 10px;
     margin-top: 40px;
     height:45px;
     width:150px;
@@ -180,4 +187,12 @@
     transition: all 0.7s ease 0s;
   }
 
+  .myinput {
+    /*width: 20%;*/
+    float:left;
+    margin-top: 40px;
+    height:45px;
+    width:220px;
+    font-size:18px;
+  }
 </style>

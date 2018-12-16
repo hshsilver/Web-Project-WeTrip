@@ -34,6 +34,18 @@
       }
     },
     methods:{
+      sms(){
+        this.$reqs.post('/users/smsnode',{
+          phonenumber:'13890880019',
+        }).then(function(result){
+          //成功
+          console.log("hao")
+
+        }).catch(function (error) {
+          //失败
+          console.log(error)
+        });
+      },
       tucao(){
         window.open("https://support.qq.com/products/48356")
       },

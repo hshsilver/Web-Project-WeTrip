@@ -119,6 +119,11 @@ var Urls = 'mongodb://localhost:27017/wetrip';
 // classweb  ===> 自动创建一个
 
 
+
+
+
+
+
 //add一条数据
 var add = function(db,collections,selector,fn){
     var collection = db.collection(collections);
@@ -168,6 +173,8 @@ var find = function(db,collections,selector,fn){
         db.close();
     });
 
+
+
 }
 
 //page
@@ -214,6 +221,31 @@ var updates = function(db,collections,selector,fn){
     });
 
 }
+
+
+
+
+// var smsnode = function(db,collections,selector,fn){
+//
+//     var collection = db.collection(collections);
+//
+//     collection.find(selector).toArray(function(err,result){
+//         //console.log(docs);
+//         try{
+//             assert.equal(err,null);
+//         }catch(e){
+//             console.log(e);
+//             result = [];
+//         }
+//
+//         fn(result);
+//         db.close();
+//     });
+//
+//     ssender.sendWithParam(86, phoneNumbers[0], templateId,
+//         params, smsSign, "", "", callback);  // 签名参数未提供或者为空时，会使用默认签名发送短信
+//     console.log("???")
+// }
 var methodType = {
     // 项目所需
     login:find,
@@ -246,6 +278,7 @@ var methodType = {
     updateRoute:updates,
     addRoute:add,
     findRoute2:find,
+    // sms:smsnode,
 
     // findroute:find,
     // RouteList:page,

@@ -12,50 +12,35 @@
     <div id="down">
 
       <div class="card" id="1">
-          <router-link :to="{path:'/backIndex/searchList',query:{content:'天津'}}">
-            <div class="pic" v-if="choose1==1" align="center">
-              <img calss="photo" id="p1" src="../assets/images/1.jpg">
-            </div>
-          </router-link>
-            <p class="place" v-if="choose1==1">天津</p>
-            <span class="mount" v-if="choose1==1">115万</span>
-            <span class="other" v-if="choose1==1">人出游</span>
+        <router-link :to="{path:'/backIndex/searchList',query:{content:'天津'}}">
+          <div class="pic" v-if="choose1==1" align="center">
+            <img calss="photo" id="p1" src="../assets/images/1.jpg">
+          </div>
+        </router-link>
 
         <router-link :to="{path:'/backIndex/searchList',query:{content:'黑龙江'}}">
           <div class="pic" v-if="choose1==2" align="center">
             <img calss="photo" id="p2" src="../assets/images/2.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose1==2">黑龙江</p>
-        <span class="mount" v-if="choose1==2">200万</span>
-        <span class="other" v-if="choose1==2">人出游</span>
 
         <router-link :to="{path:'/backIndex/searchList',query:{content:'海南'}}">
           <div class="pic" v-if="choose1==3" align="center">
             <img calss="photo" id="p3" src="../assets/images/3.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose1==3">海南</p>
-        <span class="mount" v-if="choose1==3">199万</span>
-        <span class="other" v-if="choose1==3">人出游</span>
 
         <router-link :to="{path:'/backIndex/searchList',query:{content:'河南'}}">
           <div class="pic" v-if="choose1==4" align="center">
             <img calss="photo" id="p4" src="../assets/images/4.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose1==4">河南</p>
-        <span class="mount" v-if="choose1==4">100万</span>
-        <span class="other" v-if="choose1==4">人出游</span>
 
         <router-link :to="{path:'/backIndex/searchList',query:{content:'吉林'}}">
           <div class="pic" v-if="choose1==5" align="center">
             <img calss="photo" id="p5" src="../assets/images/5.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose1==5">吉林</p>
-        <span class="mount" v-if="choose1==5">166万</span>
-        <span class="other" v-if="choose1==5">人出游</span>
       </div>
 
       <div class="card" id="2">
@@ -64,41 +49,30 @@
             <img calss="photo" id="p21" src="../assets/images/1.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose2==1">天津</p>
-        <span class="mount" v-if="choose2==1">115万</span>
-        <span class="other" v-if="choose2==1">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'黑龙江'}}">
           <div class="pic" v-if="choose2==2" align="center">
             <img calss="photo" id="p22" src="../assets/images/2.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose2==2">黑龙江</p>
-        <span class="mount" v-if="choose2==2">200万</span>
-        <span class="other" v-if="choose2==2">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'海南'}}">
           <div class="pic" v-if="choose2==3" align="center">
             <img calss="photo" id="p23" src="../assets/images/3.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose2==3">海南</p>
-        <span class="mount" v-if="choose2==3">199万</span>
-        <span class="other" v-if="choose2==3">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'河南'}}">
           <div class="pic" v-if="choose2==4" align="center">
             <img calss="photo" id="p24" src="../assets/images/4.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose2==4">河南</p>
-        <span class="mount" v-if="choose2==4">100万</span>
-        <span class="other" v-if="choose2==4">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'吉林'}}">
           <div class="pic" v-if="choose2==5" align="center">
             <img calss="photo" id="p25" src="../assets/images/5.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose2==5">吉林</p>
-        <span class="mount" v-if="choose2==5">166万</span>
-        <span class="other" v-if="choose2==5">人出游</span>
       </div>
       <div class="card" id="3">
         <router-link :to="{path:'/backIndex/searchList',query:{content:'天津'}}">
@@ -106,41 +80,31 @@
             <img calss="photo" id="p31" src="../assets/images/1.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose3==1">天津</p>
-        <span class="mount" v-if="choose3==1">115万</span>
-        <span class="other" v-if="choose3==1">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'黑龙江'}}">
           <div class="pic" v-if="choose3==2" align="center">
             <img calss="photo" id="p32" src="../assets/images/2.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose3==2">黑龙江</p>
-        <span class="mount" v-if="choose3==2">200万</span>
-        <span class="other" v-if="choose3==2">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'海南'}}">
           <div class="pic" v-if="choose3==3" align="center">
             <img calss="photo" id="p33" src="../assets/images/3.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose3==3">海南</p>
-        <span class="mount" v-if="choose3==3">199万</span>
-        <span class="other" v-if="choose3==3">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'河南'}}">
           <div class="pic" v-if="choose3==4" align="center">
             <img calss="photo" id="p34" src="../assets/images/4.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose3==4">河南</p>
-        <span class="mount" v-if="choose3==4">100万</span>
-        <span class="other" v-if="choose3==4">人出游</span>
+
         <router-link :to="{path:'/backIndex/searchList',query:{content:'吉林'}}">
           <div class="pic" v-if="choose3==5" align="center">
             <img calss="photo" id="p35" src="../assets/images/5.jpg">
           </div>
         </router-link>
-        <p class="place" v-if="choose3==5">吉林</p>
-        <span class="mount" v-if="choose3==5">166万</span>
-        <span class="other" v-if="choose3==5">人出游</span>
+
       </div>
     </div>
   </div>
@@ -250,7 +214,7 @@
   }
 
   .card {
-    float: left;
+    display: inline-block;
     margin: 10px 4% 0px 4%;
     width: 25%;
     height: 90%;
@@ -258,17 +222,19 @@
     max-width: 300px;
     border-radius: 4px;
     background: #fff;
+    transition:0.5s;
   }
 
   .card:hover {
-    box-shadow: 2px 4px 6px #4187db;
+    box-shadow: 0px 0px 20px #759bfc;
   }
 
   .pic {
     display: inline-block;
-    /*text-align: center;*/
+    text-align: center;
+    margin-left: 5%;
     width: 90%;
-    height: 70%;
+    height: 90%;
     overflow: hidden;
     /*background:#ff0000;*/
   }
@@ -276,29 +242,6 @@
   .pic img {
     margin: 10px 0px 0px 0px;
     width: 200px;
-    height: 200px;
-  }
-
-  .card .place {
-    /*background: #00B7FF;*/
-    margin-left: 35%;
-    color: #757575;
-    font-size: 18px;
-    width: 50px;
-    /*align-content: center;*/
-  }
-
-  .card .mount {
-    margin-left:28%;
-    color: #ffa360;
-    font-size: 16px;
-    width: 50px;
-  }
-
-  .card .other {
-    color: #757575;
-    font-size: 16px;
-    width: 50px;
   }
 
 </style>

@@ -48,11 +48,88 @@
 // module.exports = router;
 
 
+
+
 var express = require('express');
 var router = express.Router();
 var handler = require('./dbhandler.js');
 var crypto = require('crypto');
 var ObjectId = require('mongodb').ObjectId;
+
+var QcloudSms = require("qcloudsms_js");
+
+// 短信应用SDK AppID
+var appid = 1400141381;  // SDK AppID是1400开头
+
+// 短信应用SDK AppKey
+var appkey = "56a4d5df56d2f8e07c9ef20024996710";
+
+// 需要发送短信的手机号码
+var phoneNumbers = [""];
+
+// 短信模板ID，需要在短信应用中申请
+var templateId = 248398;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+//templateId 7839 对应的内容是"您的验证码是: {1}"
+// 签名
+var smsSign = "何书豪好好学习";  // NOTE: 这里的签名只是示例，请使用真实的已申请的签名, 签名参数使用的是`签名内容`，而不是`签名ID`
+
+// 实例化QcloudSms
+var qcloudsms = QcloudSms(appid, appkey);
+
+// 设置请求回调处理, 这里只是演示，用户需要自定义相应处理回调
+function callback(err, res, resData) {
+    if (err) {
+        console.log("err: ", err);
+    } else {
+        console.log("request data: ", res.req);
+        console.log("response data: ", resData);
+    }
+}
+
+// var QcloudSms = require("qcloudsms_js");
+//
+// // 短信应用SDK AppID
+// var appid = 1400141381;  // SDK AppID是1400开头
+//
+// // 短信应用SDK AppKey
+// var appkey = "56a4d5df56d2f8e07c9ef20024996710";
+//
+// // 需要发送短信的手机号码
+// var phoneNumbers = ["13890880019"];
+//
+// // 短信模板ID，需要在短信应用中申请
+// var templateId = 248398;  // NOTE: 这里的模板ID`7839`只是一个示例，真实的模板ID需要在短信控制台中申请
+// //templateId 7839 对应的内容是"您的验证码是: {1}"
+// // 签名
+// var smsSign = "何书豪好好学习";  // NOTE: 这里的签名只是示例，请使用真实的已申请的签名, 签名参数使用的是`签名内容`，而不是`签名ID`
+//
+// // 实例化QcloudSms
+// var qcloudsms = QcloudSms(appid, appkey);
+//
+// // 设置请求回调处理, 这里只是演示，用户需要自定义相应处理回调
+// // function callback(err, res, resData) {
+// //     if (err) {
+// //         console.log("err: ", err);
+// //     } else {
+// //         console.log("request data: ", res.req);
+// //         console.log("response data: ", resData);
+// //     }
+// // }
+//
+// var ssender = qcloudsms.SmsSingleSender();
+// var params = ["one","two","three"];//数组具体的元素个数和模板中变量个数必须一致，例如事例中templateId:5678对应一个变量，参数数组中元素个数也必须是一个
+//
+
+
+
+
+
+
+// router.post('/smsnode', function (req, res) {
+//     handler(req, res, "user", {},function(data){
+//     });
+//     res.end('{"success":"true"}')
+// });
 
 /* POST users listing. */
 //登录
@@ -175,18 +252,36 @@ router.post('/add', function(req, res, next) {
 
 //添加管理员new添加订单
 router.post('/addOrder', function(req, res, next) {
-    console.log(req.body);
+
+
+
+    console.log("???")
+    // console.log(req.body);
+
     // var md5 = crypto.createHash('md5');
     // req.body.password = md5.update(req.body.password).digest('base64');
     handler(req, res, "order", req.body,function(data){
-
+        // console.log(req.body);
         //console.log(data);
         if(data.length==0){
             res.end('{"err":"抱歉，添加失败"}');
+            console.log("!!!")
         }else{
             res.end('{"success":"添加成功"}');
+            console.log("??????")
+
+
         }
     });
+    console.log(req.body);
+    phoneNumbers[0]=req.body.phonenumsend;
+    var ssender = qcloudsms.SmsSingleSender();
+    var params = ["one","今天","three"];//数组具体的元素个数和模板中变量个数必须一致，例如事例中templateId:5678对应一个变量，参数数组中元素个数也必须是一个
+    params[0]=req.body.pname;
+    // params[1]=req.body.time;
+    params[2]=req.body.rname;
+    ssender.sendWithParam(86, phoneNumbers[0], templateId,
+        params, smsSign, "", "", callback);  // 签名参数未提供或者为空时，会使用默认签名发送短信
 });
 
 
